@@ -23,9 +23,9 @@ const MoviesDetails = () => {
     const getMoviesDetails = async () => {
       try {
         setLoading(true);
-        const { results } = await fetchMovieDetails(endPoint, movieId);
-        console.log(results);
-        setMovie(results);
+        const data = await fetchMovieDetails(endPoint, movieId);
+        console.log(data);
+        setMovie(data);
       } catch (error) {
         onFetchError();
       } finally {
@@ -43,15 +43,7 @@ const MoviesDetails = () => {
   //   return;
   // }
 
-  const {
-    poster_path,
-    title,
-    original_title,
-    release_date,
-    genres,
-    vote_average,
-    overview,
-  } = { movie };
+  const { poster_path, title, overview } = { movie };
 
   return (
     <>
@@ -70,18 +62,7 @@ const MoviesDetails = () => {
             width={250}
           />
           <div>
-            {' '}
-            <h3>{original_title}</h3>
-            <p>
-              <b>Release date:</b> {release_date}
-            </p>
-            <p>
-              <b>Genres:</b>{' '}
-              {genres.map(({ name }) => `${name.toLowerCase()} | `)}
-            </p>
-            <p>
-              <b>Ranking:</b> {vote_average}
-            </p>
+            <h3>{title}</h3>
             <p>
               <b>Overview:</b> {overview}
             </p>
