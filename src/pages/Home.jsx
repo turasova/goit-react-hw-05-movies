@@ -1,9 +1,11 @@
-import { fetchMovies } from 'MoviesApi/api';
+import { fetchMovies, onFetchError } from 'MoviesApi/api';
 import { Loader } from 'components/Loader/Loader';
 import { MoviesList } from 'components/MovieesList/MoviesList';
 import { useEffect, useState } from 'react';
 
-export const Home = () => {
+const endPoint = '/trending/movie/day';
+
+const Home = () => {
   const [loading, setLoading] = useState(false);
   const [films, setFilms] = useState([]);
 
@@ -15,11 +17,11 @@ export const Home = () => {
     const getMovies = async () => {
       try {
         setLoading(true);
-        const { results } = await fetchMovies();
+        const { results } = await fetchMovies(endPoint);
         console.log(results);
         setFilms(results);
       } catch (error) {
-        console.log(error);
+        onFetchError();
       } finally {
         setLoading(false);
       }
@@ -35,3 +37,4 @@ export const Home = () => {
     </main>
   );
 };
+export default Home;
