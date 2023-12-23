@@ -21,9 +21,19 @@ export async function fetchMovieDetails(endPoint, movieId) {
     const url = `${BASE_URL}${endPoint}/${movieId}?api_key=${API_KEY}`
     const { data } = await axios.get(url);
   return data;
-    //console.log(data)
 };
-fetchMovieDetails()
+export async function fetchMovieCast(endPoint, movieId) {
+    const url = `${BASE_URL}${endPoint}/${movieId}/credits?api_key=${API_KEY}`
+     const { data } = await axios.get(url);
+  return data;
+};
+
+export async function fetchMovieReviews(endPoint, movieId) {
+    const url = `${BASE_URL}${endPoint}/${movieId}/reviews?api_key=${API_KEY}`
+    const { data } = await axios.get(url);
+  return data;
+};
+
 
 export function onFetchError() {
     Notiflix.Notify.failure('Oops! Something went wrong! Try reloading the page or make another choice!');

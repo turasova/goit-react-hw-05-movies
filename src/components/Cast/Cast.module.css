@@ -1,0 +1,10 @@
+.listCast{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 50px;
+
+}
+.itemCast{
+    max-width: 150px;
+}

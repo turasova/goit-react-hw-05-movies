@@ -1,8 +1,15 @@
 import { fetchMovieDetails, onFetchError } from 'MoviesApi/api';
 import { Loader } from 'components/Loader/Loader';
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import {
+  Link,
+  Outlet,
+  useLocation,
+  useNavigate,
+  useParams,
+} from 'react-router-dom';
+import css from './MovieDetails.module.css';
 
 const endPoint = '/movie';
 const defaultImg =
@@ -12,13 +19,13 @@ const MoviesDetails = () => {
   const { movieId } = useParams();
   const [loading, setLoading] = useState(false);
   const [movie, setMovie] = useState(null);
-  // const location = useLocation();
-  // const navigate = useNavigate();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // if (!movieId) {
-    //   return;
-    // }
+    if (!movieId) {
+      return;
+    }
 
     const getMoviesDetails = async () => {
       try {
@@ -36,39 +43,65 @@ const MoviesDetails = () => {
     getMoviesDetails();
   }, [movieId]);
 
-  // const handelBack = () => {
-  //   navigate(location.state ?? '/movies', { state: '' });
-  // };
-  // if (!movie) {
-  //   return;
-  // }
-
-  const { poster_path, title, overview } = { movie };
+  const handelBack = () => {
+    navigate(location.state ?? '/movies', { state: 'query' });
+  };
+  if (!movie) {
+    return;
+  }
 
   return (
     <>
-      {/* <button onClick={handelBack}>go back</button> */}
-      <h2>Movie details</h2>
+      <button className={css.button} onClick={handelBack}>
+        {'<<< back'}
+      </button>
+
       {loading && <Loader />}
       {movie && (
-        <div>
-          <img
-            src={
-              poster_path
-                ? `https://image.tmdb.org/t/p/w500/${poster_path}`
-                : defaultImg
-            }
-            alt={title}
-            width={250}
-          />
+        <div className={css.movieContainer}>
           <div>
-            <h3>{title}</h3>
+            <img
+              src={
+                movie.poster_path
+                  ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+                  : defaultImg
+              }
+              alt={movie.title}
+              width={250}
+            />
+          </div>
+          <div className={css.movieInfo}>
+            <h3 className={css.title}>{movie.title}</h3>
             <p>
-              <b>Overview:</b> {overview}
+              <b>Release date:</b> {movie.release_date}
+            </p>
+            <p>
+              <b>Genres:</b>{' '}
+              {movie.genres.map(({ name }) => `${name.toLowerCase()} | `)}
+            </p>
+            <p>
+              <b>Ranking:</b> {movie.vote_average}
+            </p>
+            <p>
+              <b>Overview:</b> {movie.overview}
             </p>
           </div>
         </div>
       )}
+      <div className={css.additional}>
+        <h3>Additional information:</h3>
+        <ul className={css.listAdditional}>
+          <li>
+            <Link to="cast">Cast</Link>
+          </li>
+          <li>
+            <Link to="reviews">Reviews</Link>
+          </li>
+        </ul>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Outlet />
+        </Suspense>
+      </div>
     </>
   );
 };

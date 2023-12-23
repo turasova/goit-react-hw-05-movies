@@ -7,13 +7,13 @@ export const MoviesList = ({ films }) => {
   return (
     <ul className={css.movieList}>
       {films &&
-        films.map(({ id, title, overview, poster_path }) => (
+        films.map(({ id, title, poster_path, vote_average }) => (
           <Link to={`/movies/${id}`} state={{ from: location }}>
             <MovieItem
               key={id}
               title={title}
-              overview={overview}
               poster_path={poster_path}
+              vote_average={vote_average}
               movieId={id}
             />
           </Link>
