@@ -2,10 +2,12 @@ import { fetchMovies, onFetchError } from 'MoviesApi/api';
 import { Loader } from 'components/Loader/Loader';
 import { MoviesList } from 'components/MovieesList/MoviesList';
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 const endPoint = '/trending/movie/day';
 
 const Home = () => {
+  const { movieId } = useParams();
   const [loading, setLoading] = useState(false);
   const [films, setFilms] = useState([]);
 
@@ -33,7 +35,7 @@ const Home = () => {
     <main>
       <h1>Trending today</h1>
       {loading && <Loader />}
-      <MoviesList films={films} />
+      <MoviesList films={films} movieId={movieId} />
     </main>
   );
 };

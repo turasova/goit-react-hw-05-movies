@@ -20,9 +20,10 @@ export async function fetchSearchMovies(endPoint, query) {
 export async function fetchMovieDetails(endPoint, movieId) {
     const url = `${BASE_URL}${endPoint}/${movieId}?api_key=${API_KEY}`
     const { data } = await axios.get(url);
-    return data;
+  return data;
+    //console.log(data)
 };
-
+fetchMovieDetails()
 
 export function onFetchError() {
     Notiflix.Notify.failure('Oops! Something went wrong! Try reloading the page or make another choice!');
