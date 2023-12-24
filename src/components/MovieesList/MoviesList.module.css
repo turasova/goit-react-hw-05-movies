@@ -3,4 +3,41 @@
     flex-wrap: wrap;
     gap: 50px;
     justify-content: center;
+    margin-bottom: 50px;
+}
+.movieItem {
+    max-width: 250px;
+    color: black;
+    box-shadow: 10px 5px 5px darkblue;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-basis: calc((100% - 60px) / 3);
+    display: flex;
+
+}
+.filmImages{
+        object-fit: cover;
+        transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.filmImages:hover{
+    transform: scale(1.03);
+        cursor: zoom-in;
+}
+.text{
+    color: darkblue;
+}
+.textRanking{
+    color: white;
+    font-weight: 500;
+}
+
+.infoContainer{
+   display: flex;
+   flex-direction: column;
+   justify-content:space-between;
+   gap: 5px;
+   text-align: center;
+    font-size: 14px;
+    padding: 10px;
+        
 }

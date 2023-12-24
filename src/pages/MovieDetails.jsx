@@ -1,9 +1,9 @@
 import { fetchMovieDetails, onFetchError } from 'MoviesApi/api';
 import { Loader } from 'components/Loader/Loader';
-import { Suspense, useEffect } from 'react';
+import { Suspense, useEffect, useRef } from 'react';
 import { useState } from 'react';
 import {
-  Link,
+  NavLink,
   Outlet,
   useLocation,
   useNavigate,
@@ -21,6 +21,7 @@ const MoviesDetails = () => {
   const [movie, setMovie] = useState(null);
   const location = useLocation();
   const navigate = useNavigate();
+  const btnRef = useRef();
 
   useEffect(() => {
     if (!movieId) {
@@ -43,16 +44,17 @@ const MoviesDetails = () => {
     getMoviesDetails();
   }, [movieId]);
 
-  const handelBack = () => {
-    navigate(location.state ?? '/movies', { state: 'query' });
-  };
   if (!movie) {
     return;
   }
 
+  function handelBack() {
+    navigate(location?.state?.from ?? '/');
+  }
+
   return (
     <>
-      <button className={css.button} onClick={handelBack}>
+      <button ref={btnRef} onClick={handelBack} className={css.button}>
         {'<<< back'}
       </button>
 
@@ -68,6 +70,7 @@ const MoviesDetails = () => {
               }
               alt={movie.title}
               width={250}
+              className={css.mivieImg}
             />
           </div>
           <div className={css.movieInfo}>
@@ -92,10 +95,14 @@ const MoviesDetails = () => {
         <h3>Additional information:</h3>
         <ul className={css.listAdditional}>
           <li>
-            <Link to="cast">Cast</Link>
+            <NavLink to="cast" className={css.link}>
+              Cast
+            </NavLink>
           </li>
           <li>
-            <Link to="reviews">Reviews</Link>
+            <NavLink to="reviews" className={css.link}>
+              Reviews
+            </NavLink>
           </li>
         </ul>
         <Suspense fallback={<div>Loading...</div>}>

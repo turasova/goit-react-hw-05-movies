@@ -24,3 +24,6 @@
     font-size: larger;
     font-weight: 600;
 }
+.textLink.active{
+    color: white;
+}

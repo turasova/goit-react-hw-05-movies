@@ -7,12 +7,22 @@ export const Header = () => {
       <nav>
         <ul className={css.navList}>
           <li>
-            <NavLink to="/" className={css.textLink}>
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                `${css.textLink} ${isActive ? css.active : ''}`
+              }
+            >
               Home
             </NavLink>
           </li>
           <li>
-            <NavLink to="/movies" className={css.textLink}>
+            <NavLink
+              to="/movies"
+              className={({ isActive }) =>
+                `${css.textLink} ${isActive ? css.active : ''}`
+              }
+            >
               Movies
             </NavLink>
           </li>

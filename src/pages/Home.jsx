@@ -3,6 +3,7 @@ import { Loader } from 'components/Loader/Loader';
 import { MoviesList } from 'components/MovieesList/MoviesList';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import css from './Home.module.css';
 
 const endPoint = '/trending/movie/day';
 
@@ -33,7 +34,7 @@ const Home = () => {
 
   return (
     <main>
-      <h1>Trending today</h1>
+      <h1 className={css.titleHome}>Trending today</h1>
       {loading && <Loader />}
       <MoviesList films={films} movieId={movieId} />
     </main>
