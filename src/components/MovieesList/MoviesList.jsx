@@ -12,19 +12,24 @@ export const MoviesList = ({ films }) => {
         films.map(({ id, title, poster_path, vote_average }) => (
           <li key={id} className={css.movieItem}>
             <Link to={`/movies/${id}`} state={{ from: location }}>
-              <img
-                className={css.filmImages}
-                src={
-                  poster_path
-                    ? `https://image.tmdb.org/t/p/w500/${poster_path}`
-                    : defaultImg
-                }
-                alt={title}
-                width={250}
-              />
+              <div className={css.imgContainer}>
+                <img
+                  className={css.filmImages}
+                  src={
+                    poster_path
+                      ? `https://image.tmdb.org/t/p/w500/${poster_path}`
+                      : defaultImg
+                  }
+                  alt={title}
+                  width={250}
+                />
+              </div>
               <div className={css.infoContainer}>
                 <h3 className={css.text}>{title}</h3>
-                <p className={css.textRanking}>Ranking:{vote_average}</p>
+                <p className={css.textRanking}>
+                  Ranking:{' '}
+                  <span className={css.ranking}>{vote_average.toFixed(1)}</span>
+                </p>
               </div>
             </Link>
           </li>

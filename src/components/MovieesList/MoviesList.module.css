@@ -13,6 +13,7 @@
     overflow: hidden;
     flex-basis: calc((100% - 60px) / 3);
     display: flex;
+    position: relative;
 
 }
 .filmImages{
@@ -24,11 +25,22 @@
         cursor: zoom-in;
 }
 .text{
-    color: darkblue;
+    color: white;
 }
 .textRanking{
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 5px;
+    background-color: cornflowerblue; 
     color: white;
     font-weight: 500;
+}
+.ranking{
+    color: red;
+}
+.imgContainer{
+    height: 85%;
 }
 
 .infoContainer{
@@ -39,5 +51,5 @@
    text-align: center;
     font-size: 14px;
     padding: 10px;
-        
+          
 }
