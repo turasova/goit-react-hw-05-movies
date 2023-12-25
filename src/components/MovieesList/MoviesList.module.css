@@ -7,22 +7,24 @@
 }
 .movieItem {
     max-width: 250px;
-    color: black;
-    box-shadow: 10px 5px 5px darkblue;
+    color: black;    
     border-radius: 8px;
     overflow: hidden;
     flex-basis: calc((100% - 60px) / 3);
     display: flex;
     position: relative;
+    background-color: cornflowerblue;
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
 }
 .filmImages{
         object-fit: cover;
-        transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+      
 }
-.filmImages:hover{
+.movieItem:hover{
     transform: scale(1.03);
         cursor: zoom-in;
+        box-shadow: 10px 5px 5px rgb(61, 58, 58);
 }
 .text{
     color: white;
@@ -39,17 +41,10 @@
 .ranking{
     color: red;
 }
-.imgContainer{
-    height: 85%;
-}
 
 .infoContainer{
-   display: flex;
-   flex-direction: column;
-   justify-content:space-between;
-   gap: 5px;
    text-align: center;
     font-size: 14px;
-    padding: 10px;
+    padding: 20px;
           
 }

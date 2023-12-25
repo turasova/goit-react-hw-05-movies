@@ -25,8 +25,13 @@
 }
 .mivieImg{
     border-radius: 8px;
-    box-shadow: 10px 5px 5px darkblue;
-    
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    object-fit: cover;
+}
+.mivieImg:hover{
+    transform: scale(1.03);
+    cursor: zoom-in;
+    box-shadow: 10px 5px 5px rgb(61, 58, 58);
 }
 .listAdditional{
     margin-bottom: 50px;
