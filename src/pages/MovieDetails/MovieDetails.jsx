@@ -2,13 +2,7 @@ import { fetchMovieDetails, onFetchError } from 'MoviesApi/api';
 import { Loader } from 'components/Loader/Loader';
 import { Suspense, useEffect, useRef } from 'react';
 import { useState } from 'react';
-import {
-  NavLink,
-  Outlet,
-  useLocation,
-  useNavigate,
-  useParams,
-} from 'react-router-dom';
+import { NavLink, Outlet, useLocation, useParams } from 'react-router-dom';
 import css from './MovieDetails.module.css';
 
 const endPoint = '/movie';
@@ -20,8 +14,7 @@ const MoviesDetails = () => {
   const [loading, setLoading] = useState(false);
   const [movie, setMovie] = useState(null);
   const location = useLocation();
-  const navigate = useNavigate();
-  const btnRef = useRef();
+  const backLinkRef = useRef(location?.state?.from ?? '/');
 
   useEffect(() => {
     if (!movieId) {
@@ -48,15 +41,11 @@ const MoviesDetails = () => {
     return;
   }
 
-  function handelBack() {
-    navigate(location?.state?.from ?? '/');
-  }
-
   return (
     <>
-      <button ref={btnRef} onClick={handelBack} className={css.button}>
+      <NavLink to={backLinkRef.current} className={css.linkBack}>
         {'<<< back'}
-      </button>
+      </NavLink>
 
       {loading && <Loader />}
       {movie && (
